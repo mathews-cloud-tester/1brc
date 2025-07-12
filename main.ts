@@ -23,7 +23,7 @@ interface WorkerResult {
  */
 function getPreviousNewlinePosition(startingByteOffset: number, fd: number): number {
   const CHAR_NEWLINE = '\n'.charCodeAt(0);
-  const CHUNK_SIZE = 1024 * 1024; // 1MB chunks
+  const CHUNK_SIZE = 1 << 20; // 1MB chunks (2^20 = 1,048,576 bytes)
   const BUFFER = new Uint8Array(CHUNK_SIZE);
 
   let searchEndByte = startingByteOffset;

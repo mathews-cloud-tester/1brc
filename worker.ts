@@ -44,7 +44,7 @@ async function processFileChunk() {
     const stream = createReadStream(filePath, {
       start: startByte,
       end: endByte,
-      highWaterMark: 1024 * 1024 * 1, // 1MB buffer (sweet spot for performance)
+      highWaterMark: 1 << 20, // 1MB buffer (sweet spot for performance)
     });
 
     let buffer = Buffer.alloc(0);
