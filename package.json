@@ -5,6 +5,8 @@
   "private": true,
   "scripts": {
     "bun": "bun run main.ts",
+    "zig": "bun run main-zig.ts",
+    "build:zig": "cd zig && zig build -Doptimize=ReleaseFast",
     "node": "node --loader ts-node/esm main.ts",
     "build": "tsc",
     "start": "node dist/main.js"
