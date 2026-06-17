@@ -47,11 +47,17 @@ async function processFileChunk() {
       highWaterMark: 1 << 20, // 1MB buffer (sweet spot for performance)
     });
 
-    let buffer = Buffer.alloc(0);
+    // Holds the unprocessed tail of the previous chunk (at most one partial line).
+    // Using a slice avoids re-copying the entire accumulated buffer on every iteration.
+    let tail: Buffer = Buffer.alloc(0);
 
-    for await (const chunk of stream) {
-      buffer = Buffer.concat([buffer, chunk]);
-      
+    for await (const rawChunk of stream) {
+      // Only allocate a new Buffer when there are leftover bytes from the previous chunk.
+      // In the common case (tail is empty) we work directly on the incoming chunk.
+      const buffer: Buffer = tail.length > 0
+        ? Buffer.concat([tail, rawChunk as Buffer])
+        : rawChunk as Buffer;
+
       // Process complete lines in the buffer
       let lineStart = 0;
       for (let i = 0; i < buffer.length; i++) {
@@ -65,18 +71,16 @@ async function processFileChunk() {
           lineStart = i + 1;
         }
       }
-      
-      // Keep remaining incomplete line in buffer
-      if (lineStart < buffer.length) {
-        buffer = buffer.subarray(lineStart);
-      } else {
-        buffer = Buffer.alloc(0);
-      }
+
+      // Retain only the incomplete trailing fragment (typically a few bytes)
+      tail = lineStart < buffer.length
+        ? buffer.subarray(lineStart)
+        : Buffer.alloc(0);
     }
 
-    // Process final line if buffer has content
-    if (buffer.length > 0) {
-      processLineFromBuffer(buffer, 0, buffer.length, stats);
+    // Process final line if tail has content (last line with no trailing newline)
+    if (tail.length > 0) {
+      processLineFromBuffer(tail, 0, tail.length, stats);
       rowsProcessed++;
     }
 
