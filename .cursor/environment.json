@@ -1,0 +1,11 @@
+{
+  "name": "Quick Cloud API Test Env",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "user": "ubuntu",
+  "install": "echo quick-cloud-api-test",
+  "terminals": [],
+  "ports": []
+}
