@@ -1,0 +1,6 @@
+{
+  "mcpServers": {
+    "repo-stdio-mcp": { "command": "npx", "args": ["-y", "@modelcontextprotocol/server-everything"] },
+    "repo-http-mcp":  { "url": "https://mcp.example.com/sse" }
+  }
+}

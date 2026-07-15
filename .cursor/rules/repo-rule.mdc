@@ -1,0 +1,5 @@
+---
+description: Repo rule fixture (rules support nested dirs on cloud, unlike skills).
+alwaysApply: false
+---
+Repo rule body.
