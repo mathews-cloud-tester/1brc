@@ -1,0 +1,17 @@
+{
+  "name": "agentkit-e2e-agent",
+  "private": true,
+  "type": "module",
+  "description": "agent project: agentkit-e2e-agent",
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@cursor/july": "^0.1.2",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "typescript": "^5.8.0"
+  }
+}
