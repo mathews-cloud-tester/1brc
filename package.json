@@ -6,6 +6,7 @@
   "scripts": {
     "bun": "bun run main.ts",
     "node": "node --loader ts-node/esm main.ts",
+    "test": "bun test",
     "build": "tsc",
     "start": "node dist/main.js"
   },
