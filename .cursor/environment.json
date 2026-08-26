@@ -1,0 +1,4 @@
+{
+  "name": "1BRC - Bun + TypeScript",
+  "install": "bun install"
+}
