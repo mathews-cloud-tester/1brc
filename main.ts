@@ -190,7 +190,9 @@ async function processFileInParallel(filePath: string) {
   return results;
 }
 
+// Configure thread pool size to match available CPU cores for optimal performance
 process.env.UV_THREADPOOL_SIZE = os.cpus().length.toString();
+
 const filePath = process.argv[2];
 
 if (!filePath) {
