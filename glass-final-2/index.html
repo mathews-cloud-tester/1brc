@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>App secrets demo</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 4rem auto; padding: 0 1rem; color: #222; background: #fafafa; }
+    h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    #greeting { font-family: ui-monospace, monospace; background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 0.75rem 1rem; }
+  </style>
+</head>
+<body>
+  <h1>App secrets demo</h1>
+  <p>The value below is read by the published app from its environment and is never in the source.</p>
+  <p id="greeting">GREETING_SECRET: not set</p>
+  <script>
+    fetch("/api/greeting")
+      .then(function (res) {
+        if (!res.ok) throw new Error("bad response");
+        return res.json();
+      })
+      .then(function (data) {
+        if (data && typeof data.GREETING_SECRET === "string") {
+          document.getElementById("greeting").textContent = "GREETING_SECRET: " + data.GREETING_SECRET;
+        }
+      })
+      .catch(function () {});
+  </script>
+</body>
+</html>
