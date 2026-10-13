@@ -198,6 +198,12 @@ if (!filePath) {
   process.exit(1);
 }
 
+// Validate that the file exists before processing
+if (!fs.existsSync(filePath)) {
+  console.error(`❌ File not found: ${filePath}`);
+  process.exit(1);
+}
+
 /*====================================*/
 /*           Run the program          */
 /*====================================*/
