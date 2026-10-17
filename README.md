@@ -1,3 +1,5 @@
+<!-- one-line note: 1brc Bun/TypeScript CLI -->
+
 # 1br-tae
 
 Tae's attempt at the 1 Billion Row Challenge in Bun/Typescript
