@@ -9,7 +9,7 @@
     "allowJs": true,
 
     // Node.js compatible module resolution
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "outDir": "./dist",
