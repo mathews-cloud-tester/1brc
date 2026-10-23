@@ -5,7 +5,8 @@
 This is a single-purpose **Bun + TypeScript CLI** for the 1 Billion Row Challenge (1BRC). It is a one-shot batch program — there are **no servers, services, ports, or databases** to run. You invoke it against an input file and it prints aggregated min/mean/max per weather station, then exits.
 
 ### Runtime / environment
-- `bun` is **not** preinstalled and `https://bun.sh/install` is network-blocked in this environment. It is installed via npm to `~/.local` (`npm install -g bun --prefix "$HOME/.local"`), which the startup update script keeps current. `~/.local/bin` is on `PATH` via `~/.bashrc`; if a non-interactive shell can't find `bun`, call it as `~/.local/bin/bun`.
+- Cloud Agent `install` installs Bun with `https://bun.sh/install` and symlinks `bun` and `bunx` to `/usr/local/bin`, which is on the default `PATH`. The installer also prepends `~/.bun/bin` in `~/.bashrc`.
+- If `bun` is missing (for example a default-image boot that skipped `install`), run `curl -fsSL https://bun.sh/install | bash`, then `sudo ln -sf "$HOME/.bun/bin/bun" /usr/local/bin/bun` and the same for `bunx`.
 - `.cursorrules` says to prefer Bun commands. Node also works as an alternate runtime.
 
 ### Common commands (see `package.json` scripts and `README.md`)
